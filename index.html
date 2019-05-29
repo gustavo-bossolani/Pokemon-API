@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
+    <!-- Import index.css -->
+    <link type="text/css" rel="stylesheet" href="css/index.css" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+
+<header>
+    <nav>
+        <div class="nav-wrapper purple">
+            <a href="#" class="brand-logo right">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/104.png" width="70px"
+                    height="70px">
+            </a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li><a href="">Gustavo Bossolani</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+<body class="purple lighten-5">
+
+    <div class="container">
+
+        <ul class="collapsible popout">
+            <li>
+                <div class="collapsible-header"><i class="material-icons">search</i>Comos Buscar</div>
+                <div class="collapsible-body">
+                    <span>
+                        Para Buscar um pokemon, basta digitar o nome e pressionar Enter. <br>
+                        Para Buscar um pokemon MEGA, ALOLA ou variações MEGA, basta adcionar um - sem usa ESPAÇOS. <br>
+                        Não é possível Buscar um Pokemon pelo numero de Pokedex, apenas por ID.
+                    </span>
+                </div>
+            </li>
+        </ul>
+
+        <h3 id="output-campo-nome"</h3>Você está pesquisando por: </h3>
+        <div class="section">
+            <form>
+                <input type="text" id="campo-nome" class="validate">
+                <button class="btn purple waves-effect waves-light" type="submit" id="pesquisar-pokemon">Pesquisar</button>
+                <button class="btn purple waves-effect waves-light" type="submit" id="gerar-pokemon">Buscar
+                    Aleatório por ID</button>
+            </form>
+        </div>
+
+        <div class="row">
+            <img src="" style="background-color: purple;" class="col s3 hoverable" id="poke-imagem">
+
+            <ul class="col s9">
+                <li class="border hoverable">
+                    <blockquote>
+                        <h6 id="nome-poke">Nome</h6>
+                    </blockquote>
+                </li><br>
+                <li class="border hoverable">
+                    <blockquote id="numero-poke">Numero Pokedex</blockquote>
+                </li><br>
+
+                <li class="border hoverable">
+                    <blockquote id="tipo-poke">Tipo</blockquote>
+                </li><br>
+
+                <li class="border hoverable">
+                    <blockquote id="id-poke">ID</blockquote>
+                </li><br>
+
+                <li class="border hoverable">
+                    <blockquote id="peso-poke">Peso</blockquote>
+                </li><br>
+
+            </ul>
+        </div>
+
+    </div>
+</body>
+
+
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="css/jquery.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/api.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.collapsible').collapsible();
+    });
+</script>
+
+</html>
