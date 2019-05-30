@@ -2,6 +2,43 @@
     border: 1px solid #e0e0e0;
 }
 
-blockquote {
-    border-left: 7px solid #888f8b
+blockquote.nome {
+    border-left: 7px solid #f38f0b;
+}
+
+blockquote.numero-poke {
+    border-left: 7px solid #02fdb2;
+}
+
+blockquote.tipo {
+    border-left: 7px solid #85057a;
+}
+
+blockquote.id {
+    border-left: 7px solid #099476;
+}
+
+blockquote.peso {
+    border-left: 7px solid #91040f;
+}
+
+li {
+    margin-bottom: 2%;
+}
+
+img.center {
+    display: block;
+    margin: 0 auto;
+}
+
+img {
+    width: 70%;
+    height: auto;
+}
+
+.badge-tipo {
+    padding: 3px;
+    margin-left: 5px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px .5px 0 #000, .5px .5px 0 #000;
+    border-radius: 5%;
 }
