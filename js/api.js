@@ -8,6 +8,8 @@ var campo = document.querySelector('#campo-nome');
 var xhr = new XMLHttpRequest();
 var url;
 
+console.log(retornarTipo('dark'));
+
 // FIM ATRIBUTOS
 
 campo.addEventListener('input', () => {
@@ -18,7 +20,6 @@ campo.addEventListener('input', () => {
 // METODOS DE PESQUISA E GERAÇÃO DE OBJETOS
 btnPesquisar.addEventListener('click', () => {
     if (event) event.preventDefault();
-
     url = 'https://pokeapi.co/api/v2/pokemon/' + campo.value.toLowerCase() + '/';
     xhr.open('GET', url);
     console.log(url);
@@ -33,6 +34,7 @@ btnPesquisar.addEventListener('click', () => {
             pokemon = JSON.parse(xhr.responseText);
             console.log(pokemon);
 
+            limpaCampos();
             mudarFoto(pokemon);
             mudarCampos(pokemon);
             setarTipos(pokemon);
@@ -46,7 +48,6 @@ btnPesquisar.addEventListener('click', () => {
 
 btnGerar.addEventListener('click', () => {
     if (event) event.preventDefault();
-
     var id = Math.floor((Math.random() * 808));
     url = 'https://pokeapi.co/api/v2/pokemon/' + id + '/';
     xhr.open('GET', url);
@@ -61,6 +62,7 @@ btnGerar.addEventListener('click', () => {
             pokemon = JSON.parse(xhr.responseText);
             console.log(pokemon);
 
+            limpaCampos();
             mudarFoto(pokemon);
             mudarCampos(pokemon);
             setarTipos(pokemon);
@@ -71,13 +73,15 @@ btnGerar.addEventListener('click', () => {
     };
     xhr.send();
 });
-
 // FIM METODOS DE CRIAÇÃO
+
 
 // METODOS DE MANIPULAÇÃO DO DOM
 function mudarFoto(pokemon) {
     var imagem = document.querySelector('#poke-imagem');
     imagem.src = pokemon.sprites.front_default;
+    var tipo = retornarTipo(pokemon.types[0].type.name);
+    imagem.setAttribute('style', `background-color: ${tipo.color}; border-radius: 10px;`);
 }
 
 function mudarCampos(pokemon) {
@@ -127,6 +131,11 @@ function limpaCampos() {
     let tipoPoke = document.querySelector('#tipo-poke');
     let pesoPoke = document.querySelector('#peso-poke');
 
+    nomePoke.textContent = '';
+    numeroPoke.textContent = '';
+    idPoke.textContent = '';
+    tipoPoke.textContent = '';
+    pesoPoke.textContent = '';
 
 }
 // FIM MÉTODOS DE MANIPULAÇÃO
