@@ -34,99 +34,127 @@
 
 
 <body class="purple lighten-5">
-
-    <div class="container">
-
-        <!-- Informações de Busca -->
-        <ul class="collapsible popout">
-            <li>
-                <div class="collapsible-header"><i class="material-icons">search</i>Comos Buscar</div>
-                <div class="collapsible-body">
-                    <span>
-                        <ul>
-                            <li>
-                                Buscar um pokemon, basta digitar o nome e pressionar Enter;
-                            </li>
-                            <li>
-                                Para Buscar um pokemon MEGA, ALOLA ou variações MEGA, basta adcionar um - sem usa
-                                ESPAÇOS;
-                            </li>
-                            <li>
-                                Não é possível Buscar um Pokemon pelo numero de Pokedex, apenas por ID.
-                            </li>
-                        </ul>
-                    </span>
-                </div>
-            </li>
-        </ul>
-        <!-- Fim Informações de Busca -->
-
-        <!-- Formulário -->
-        <h3 id="output-campo-nome" </h3>Você está pesquisando por: </h3> <div class="section">
-            <form>
-                <input type="text" id="campo-nome" class="validate">
-                <button class="btn purple waves-effect waves-light" type="submit"
-                    id="pesquisar-pokemon">Pesquisar</button>
-                <button class="btn purple waves-effect waves-light" type="submit" id="gerar-pokemon">Buscar
-                    Aleatório por ID</button>
-            </form>
-    </div>
-    <!-- Fim Formulário -->
-
-    <!-- Template de badge Tipo
-    <span class="badge green white-text text-darken-2">GRASS</span>
-    <span class="badge red white-text text-darken-2">FIRE</span>
-    <span class="badge blue white-text text-darken-2">WHATER</span> -->
-
-    <!-- Output de Informações -->
-    <div class="row">
-        <div class="col s12 m12 l6 xl6">
-            <img src="" class="hoverable center" id="poke-imagem">
-        </div>
-
-        <div class="col s12 m12 l6 xl6">
-            <ul>
-                <li class="border hoverable">
-                    <blockquote class="nome">
-                        <h6 style="font-weight:bold;">Nome</h6>
-                        <span id="nome-poke"></span>
-                    </blockquote>
+    <main>
+        <div class="container">
+            <!-- Informações de Busca -->
+            <ul class="collapsible popout">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">search</i>Comos Buscar</div>
+                    <div class="collapsible-body">
+                        <span>
+                            <ul>
+                                <li>
+                                    Buscar um pokemon, basta digitar o nome e pressionar Enter;
+                                </li>
+                                <li>
+                                    Para Buscar um pokemon MEGA, ALOLA ou variações MEGA, basta adcionar um - sem usa
+                                    ESPAÇOS;
+                                </li>
+                                <li>
+                                    É possível buscar pelo numero da Pokedex também!
+                                </li>
+                            </ul>
+                        </span>
+                    </div>
                 </li>
-
-                <li class="border hoverable">
-                    <blockquote class="numero-poke">
-                        <h6 style="font-weight:bold;">Numero Pokedex</h6>
-                        <span id="numero-poke"></span>
-                    </blockquote>
-                </li>
-
-
-                <li class="border hoverable">
-                    <blockquote class="id">
-                        <h6 style="font-weight:bold;">Identificador no Sistema</h6>
-                        <span id="id-poke"></span>
-                    </blockquote>
-                </li>
-
-                <li class="border hoverable">
-                    <blockquote class="tipo">
-                        <h6 style="font-weight:bold; margin-bottom: 3%;">Tipo:</h6>
-                        <div id="tipo-poke"></div>
-                    </blockquote>
-                </li>
-
-                <li class="border hoverable">
-                    <blockquote class="peso">
-                        <h6 style="font-weight:bold;">Peso</h6>
-                        <span id="peso-poke"></span>
-                    </blockquote>
-                </li>
-
             </ul>
-        </div>
-    </div>
+            <!-- Fim Informações de Busca -->
 
-    </div>
+            <!-- Formulário -->
+            <h4 class="grey-text">
+                Pesquisando por
+                <h2 id="output-campo-nome" class="purple-text" style="margin-top: -1%;"></h2>
+            </h4>
+            <div class="section">
+                <form>
+                    <div class="row">
+                        <div class="col s10 m10 l10 xl10">
+                            <input type="text" id="campo-nome" class="validate">
+                        </div>
+                        <div class="col s2 m2 l2 xl2">
+                            <a class="btn-floating waves-effect waves-light purple" id="retornar-poke">
+                                <i class="material-icons">settings_backup_restore</i>
+                            </a>
+                        </div>
+
+                    </div>
+                    <button class="btn purple waves-effect waves-light" type="submit"
+                        id="pesquisar-pokemon">Buscar</button>
+                    <button class="btn purple waves-effect waves-light" type="submit"
+                        id="gerar-pokemon">ALeatório</button>
+                </form>
+            </div>
+            <!-- Fim Formulário -->
+
+            <!-- Output de Informações -->
+            <div class="row">
+                <div class="col s12 m12 l4 xl4">
+                    <img src="" class="z-depth-4 center" id="poke-imagem">
+                </div>
+
+                <!-- COLUNA 1 -->
+                <div class="col s6 m6 l4 xl4">
+                    <ul>
+                        <!-- NOME -->
+                        <li class="border hoverable">
+                            <blockquote class="nome">
+                                <h6 style="font-weight:bold;">Nome</h6>
+                                <span id="nome-poke"></span>
+                            </blockquote>
+                        </li>
+
+                        <!-- NUMERO POKEDEX -->
+                        <li class="border hoverable">
+                            <blockquote class="numero-poke">
+                                <h6 style="font-weight:bold;">Nº Pokedex</h6>
+                                <span id="numero-poke"></span>
+                            </blockquote>
+                        </li>
+
+                        <!-- PESO -->
+                        <li class="border hoverable">
+                            <blockquote class="peso">
+                                <h6 style="font-weight:bold;">Peso</h6>
+                                <span id="peso-poke"></span>
+                            </blockquote>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- COLUNA 2 -->
+                <div class="col s6 m6 l4 xl4">
+                    <ul>
+
+                        <!-- TIPOS -->
+                        <li class="border hoverable">
+                            <blockquote class="tipo">
+                                <h6 style="font-weight:bold; margin-bottom: 3%;">Tipo:</h6>
+                                <div id="tipo-poke"></div>
+                            </blockquote>
+                        </li>
+
+                        <!-- ID NO SISTEMA -->
+                        <li class="border hoverable">
+                            <blockquote class="id">
+                                <h6 style="font-weight:bold;">ID</h6>
+                                <span id="id-poke"></span>
+                            </blockquote>
+                        </li>
+
+                        <!-- ALTURA -->
+                        <li class="border hoverable">
+                            <blockquote class="altura">
+                                <h6 style="font-weight:bold;">Altura</h6>
+                                <div id="altura-poke"></div>
+                            </blockquote>
+                        </li>
+                </div>
+            </div>
+            <div class="collection" id="historico">
+                <!-- <a href="#!" class="collection-item">Pokemon A</a> -->
+            </div>
+        </div>
+    </main>
 </body>
 
 

@@ -2,76 +2,80 @@
 // Atributos DOM
 var btnPesquisar = document.querySelector('#pesquisar-pokemon');
 var btnGerar = document.querySelector('#gerar-pokemon');
+var brnRetornar = document.querySelector('#retornar-poke');
 var campo = document.querySelector('#campo-nome');
 
 // Atributos API
 var xhr = new XMLHttpRequest();
 var url;
-
-console.log(retornarTipo('dark'));
-
+let pokemonAtual;
+let anteriores = [];
 // FIM ATRIBUTOS
+
 
 campo.addEventListener('input', () => {
     var output = document.querySelector('#output-campo-nome');
-    output.textContent = 'Você está pesquisando por: ' + campo.value;
+    output.textContent = campo.value;
 });
 
 // METODOS DE PESQUISA E GERAÇÃO DE OBJETOS
-btnPesquisar.addEventListener('click', () => {
-    if (event) event.preventDefault();
-    url = 'https://pokeapi.co/api/v2/pokemon/' + campo.value.toLowerCase() + '/';
+
+function pesquisarPokemon(valorBusca, tipoPesquisa) {
+
+    if (tipoPesquisa === 'pesquisa') {
+        url = `https://pokeapi.co/api/v2/pokemon/${valorBusca.toLowerCase().trim()}/`;
+    } else {
+        var pokedexNumber = Math.floor((Math.random() * 808));
+        url = `https://pokeapi.co/api/v2/pokemon/${pokedexNumber}/`;
+    }
+
     xhr.open('GET', url);
     console.log(url);
 
     xhr.onload = () => {
 
         console.log('BUSCA FEITA: ', xhr.status);
-        let pokemon;
+        pokemonAtual;
 
         if (xhr.status == 200) {
             console.log('SUCESSO: status - ', xhr.status);
-            pokemon = JSON.parse(xhr.responseText);
-            console.log(pokemon);
+
+            if (pokemonAtual != undefined) {
+                salvarNoHistórico(pokemonAtual);
+                pokemonAtual = JSON.parse(xhr.responseText);
+            }
+
+            pokemonAtual = JSON.parse(xhr.responseText);
+            console.log('ATUAL ' + pokemonAtual.name);
 
             limpaCampos();
-            mudarFoto(pokemon);
-            mudarCampos(pokemon);
-            setarTipos(pokemon);
+            mudarFoto(pokemonAtual);
+            mudarCampos(pokemonAtual);
+            setarTipos(pokemonAtual);
 
         } else {
             M.toast({ html: 'Pokemon não Encontrado', classes: 'rounded' });
+            limpaCampos();
         }
     };
     xhr.send();
+}
+
+btnPesquisar.addEventListener('click', () => {
+    if (event) event.preventDefault();
+    pesquisarPokemon(campo.value.toLowerCase().trim(), 'pesquisa');
 });
 
 btnGerar.addEventListener('click', () => {
     if (event) event.preventDefault();
-    var id = Math.floor((Math.random() * 808));
-    url = 'https://pokeapi.co/api/v2/pokemon/' + id + '/';
-    xhr.open('GET', url);
+    pesquisarPokemon(campo.value.toLowerCase().trim(), 'gerar');
+});
 
-    xhr.onload = () => {
-
-        console.log('BUSCA FEITA: ', xhr.status);
-        let pokemon;
-
-        if (xhr.status == 200) {
-            console.log('SUCESSO: status - ', xhr.status);
-            pokemon = JSON.parse(xhr.responseText);
-            console.log(pokemon);
-
-            limpaCampos();
-            mudarFoto(pokemon);
-            mudarCampos(pokemon);
-            setarTipos(pokemon);
-
-        } else {
-            console.log("deu erro");
-        }
-    };
-    xhr.send();
+brnRetornar.addEventListener('click', () => {
+    limpaCampos();
+    mudarFoto(pokemonAnterior);
+    mudarCampos(pokemonAnterior);
+    setarTipos(pokemonAnterior);
 });
 // FIM METODOS DE CRIAÇÃO
 
@@ -81,7 +85,7 @@ function mudarFoto(pokemon) {
     var imagem = document.querySelector('#poke-imagem');
     imagem.src = pokemon.sprites.front_default;
     var tipo = retornarTipo(pokemon.types[0].type.name);
-    imagem.setAttribute('style', `background-color: ${tipo.color}; border-radius: 10px;`);
+    imagem.setAttribute('style', `background-color: ${tipo.color}; border-radius: 10px; padding: -10%;`);
 }
 
 function mudarCampos(pokemon) {
@@ -89,14 +93,17 @@ function mudarCampos(pokemon) {
     var numeroPoke = document.querySelector('#numero-poke');
     var idPoke = document.querySelector('#id-poke');
     var pesoPoke = document.querySelector('#peso-poke');
+    var alturaPoke = document.querySelector('#altura-poke');
 
     nomePoke.textContent = pokemon.name.toUpperCase();
-    numeroPoke.textContent = pokemon.order;
-    idPoke.textContent = pokemon.id;
-    pesoPoke.textContent = pokemon.weight;
+    numeroPoke.textContent = pokemon.id;
+    idPoke.textContent = pokemon.order;
+    pesoPoke.textContent = pokemon.weight / 10 + ' kg';
+    alturaPoke.textContent = pokemon.height / 10 + ' m';
 }
 
 function setarTipos(pokemon) {
+    // TEMPLATE DE BADGE PARA ESTILIZAR TIPOS
     //<span class="badge green white-text text-darken-2">GRASS</span>
     var tipoPoke = document.querySelector('#tipo-poke');
 
@@ -130,18 +137,24 @@ function limpaCampos() {
     let idPoke = document.querySelector('#id-poke');
     let tipoPoke = document.querySelector('#tipo-poke');
     let pesoPoke = document.querySelector('#peso-poke');
+    let alturaPoke = document.querySelector('#altura-poke');
+    let imagePoke = document.querySelector('#poke-imagem');
 
     nomePoke.textContent = '';
     numeroPoke.textContent = '';
     idPoke.textContent = '';
     tipoPoke.textContent = '';
     pesoPoke.textContent = '';
+    alturaPoke.textContent = '';
+    imagePoke.src = '';
 
 }
+
+
 // FIM MÉTODOS DE MANIPULAÇÃO
 
 
-
+// METODOS DE BUSCA E RETORNO DE CONFIGURAÇÃO
 function buscarTodosTipos() {
 
     let url = 'https://pokeapi.co/api/v2/type/';
@@ -173,81 +186,103 @@ function retornarTipo(tipoPoke) {
 
     // Verificação
     switch (tipoPoke) {
+        case enumTipos.normal.index:
         case enumTipos.normal.name:
             objTipo = enumTipos.normal;
             break;
 
+        case enumTipos.fighting.index:
         case enumTipos.fighting.name:
             objTipo = enumTipos.fighting;
             break;
 
+        case enumTipos.flying.index:
         case enumTipos.flying.name:
             objTipo = enumTipos.flying;
             break;
+
+        case enumTipos.poison.index:
         case enumTipos.poison.name:
             objTipo = enumTipos.poison;
             break;
 
+        case enumTipos.ground.index:
         case enumTipos.ground.name:
             objTipo = enumTipos.ground;
             break;
 
+        case enumTipos.rock.index:
         case enumTipos.rock.name:
             objTipo = enumTipos.rock;
             break;
 
+        case enumTipos.bug.index:
         case enumTipos.bug.name:
             objTipo = enumTipos.bug;
             break;
 
+        case enumTipos.ghost.index:
         case enumTipos.ghost.name:
             objTipo = enumTipos.ghost;
             break;
 
+        case enumTipos.steel.index:
         case enumTipos.steel.name:
             objTipo = enumTipos.steel;
             break;
 
 
+        case enumTipos.fire.index:
         case enumTipos.fire.name:
             objTipo = enumTipos.fire;
             break;
 
+        case enumTipos.water.index:
         case enumTipos.water.name:
             objTipo = enumTipos.water;
             break;
 
+        case enumTipos.grass.index:
         case enumTipos.grass.name:
             objTipo = enumTipos.grass;
             break;
 
+        case enumTipos.electric.index:
         case enumTipos.electric.name:
             objTipo = enumTipos.electric;
             break;
+
+        case enumTipos.psychic.index:
         case enumTipos.psychic.name:
             objTipo = enumTipos.psychic;
             break;
 
+        case enumTipos.ice.index:
         case enumTipos.ice.name:
             objTipo = enumTipos.ice;
             break;
 
+        case enumTipos.dragon.index:
         case enumTipos.dragon.name:
             objTipo = enumTipos.dragon;
             break;
 
+        case enumTipos.dark.index:
         case enumTipos.dark.name:
             objTipo = enumTipos.dark;
             break;
 
+        case enumTipos.fairy.index:
         case enumTipos.fairy.name:
             objTipo = enumTipos.fairy;
             break;
 
+        case enumTipos.unknown.index:
         case enumTipos.unknown.name:
             objTipo = enumTipos.unknown;
             break;
 
+        case enumTipos.shadow.index:
         case enumTipos.shadow.name:
             objTipo = enumTipos.shadow;
             break;
@@ -280,3 +315,32 @@ function pegaEnumTipos() {
     };
     return EnumTipos;
 }
+
+function salvarNoHistórico(pokemon) {
+    anteriores.push(pokemon);
+
+    console.log('Atualizadno histórico');
+    var a = document.createElement('a');
+    a.classList.add('collection-item');
+    a.textContent = pokemon.name.toUpperCase();
+    a.setAttribute('href', '');
+    a.setAttribute('id', 'pokemon-a');
+    let historico = document.querySelector('#historico');
+    historico.appendChild(a);
+    console.log('histórico atualizado');
+
+}
+// function listarHistórico() {
+//     // <!-- <a href="#!" class="collection-item">Pokemon A</a> -->
+//     let historico = document.querySelector('#historico');
+
+//     anteriores.forEach(pokemon => {
+//         var a = document.createElement('a');
+//         a.classList.add('collection-item');
+//         a.textContent = pokemon.name;
+//         historico.appendChild(a);
+//     });
+
+// }
+
+// FIM METODOS DE CONFIGURAÇÃO E BUSCA

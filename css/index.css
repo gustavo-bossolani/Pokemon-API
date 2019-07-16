@@ -1,3 +1,13 @@
+
+.collection a{
+    background: #e0cee4 !important;
+    color: black !important;
+}
+.collection a:hover{
+    color: white !important;
+    background: #9c27b0 !important;
+}
+
 .border {
     border: 1px solid #e0e0e0;
 }
@@ -5,21 +15,20 @@
 blockquote.nome {
     border-left: 7px solid #f38f0b;
 }
-
 blockquote.numero-poke {
     border-left: 7px solid #02fdb2;
 }
-
 blockquote.tipo {
     border-left: 7px solid #85057a;
 }
-
 blockquote.id {
     border-left: 7px solid #099476;
 }
-
 blockquote.peso {
     border-left: 7px solid #91040f;
+}
+blockquote.altura {
+    border-left: 7px solid #048c91;
 }
 
 img.center {
