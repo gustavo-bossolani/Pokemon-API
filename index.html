@@ -22,8 +22,7 @@
     <nav>
         <div class="nav-wrapper purple">
             <a href="#" class="brand-logo right">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/104.png" width="70px"
-                    height="70px">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/104.png" width="70px" height="70px">
             </a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li><a href="">Gustavo Bossolani</a></li>
@@ -33,7 +32,7 @@
 </header>
 
 
-<body class="purple lighten-5">
+<body class="blue-grey lighten-5">
     <main>
         <div class="container">
             <!-- Informações de Busca -->
@@ -78,10 +77,8 @@
                         </div>
 
                     </div>
-                    <button class="btn purple waves-effect waves-light" type="submit"
-                        id="pesquisar-pokemon">Buscar</button>
-                    <button class="btn purple waves-effect waves-light" type="submit"
-                        id="gerar-pokemon">ALeatório</button>
+                    <button class="btn purple waves-effect waves-light" type="submit" id="pesquisar-pokemon">Buscar</button>
+                    <button class="btn purple waves-effect waves-light" type="submit" id="gerar-pokemon">ALeatório</button>
                 </form>
             </div>
             <!-- Fim Formulário -->
@@ -150,7 +147,18 @@
                         </li>
                 </div>
             </div>
-            <div class="collection" id="historico">
+            <div class="collection">
+                <nav>
+                    <ul id="historico"></ul>
+
+                    <li class="collection-item">
+                        <!-- <div>Alvin
+                            <a href="#!" class="secondary-content">
+                                <i class="material-icons">send</i>
+                            </a>
+                        </div> -->
+                    </li>
+                </nav>
                 <!-- <a href="#!" class="collection-item">Pokemon A</a> -->
             </div>
         </div>
@@ -163,7 +171,7 @@
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="js/api.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.collapsible').collapsible();
     });
 </script>

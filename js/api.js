@@ -1,4 +1,3 @@
-
 // Atributos DOM
 var btnPesquisar = document.querySelector('#pesquisar-pokemon');
 var btnGerar = document.querySelector('#gerar-pokemon');
@@ -10,6 +9,7 @@ var xhr = new XMLHttpRequest();
 var url;
 let pokemonAtual;
 let anteriores = [];
+let contadorHistórico = -1;
 // FIM ATRIBUTOS
 
 
@@ -41,7 +41,7 @@ function pesquisarPokemon(valorBusca, tipoPesquisa) {
             console.log('SUCESSO: status - ', xhr.status);
 
             if (pokemonAtual != undefined) {
-                salvarNoHistórico(pokemonAtual);
+                salvarNoHistorico(pokemonAtual);
                 pokemonAtual = JSON.parse(xhr.responseText);
             }
 
@@ -73,9 +73,9 @@ btnGerar.addEventListener('click', () => {
 
 brnRetornar.addEventListener('click', () => {
     limpaCampos();
-    mudarFoto(pokemonAnterior);
-    mudarCampos(pokemonAnterior);
-    setarTipos(pokemonAnterior);
+    mudarFoto(pokemonAtual);
+    mudarCampos(pokemonAtual);
+    setarTipos(pokemonAtual);
 });
 // FIM METODOS DE CRIAÇÃO
 
@@ -316,31 +316,30 @@ function pegaEnumTipos() {
     return EnumTipos;
 }
 
-function salvarNoHistórico(pokemon) {
+function salvarNoHistorico(pokemon) {
+    // inserindo um pokemon anterior no histórico e adcionando um id no mesmo
     anteriores.push(pokemon);
+    contadorHistórico++;
 
-    console.log('Atualizadno histórico');
     var a = document.createElement('a');
     a.classList.add('collection-item');
     a.textContent = pokemon.name.toUpperCase();
     a.setAttribute('href', '');
-    a.setAttribute('id', 'pokemon-a');
+    a.setAttribute('id', contadorHistórico);
+    a.setAttribute('onClick', 'selecionarPokemon(this.id)');
     let historico = document.querySelector('#historico');
     historico.appendChild(a);
     console.log('histórico atualizado');
-
 }
-// function listarHistórico() {
-//     // <!-- <a href="#!" class="collection-item">Pokemon A</a> -->
-//     let historico = document.querySelector('#historico');
 
-//     anteriores.forEach(pokemon => {
-//         var a = document.createElement('a');
-//         a.classList.add('collection-item');
-//         a.textContent = pokemon.name;
-//         historico.appendChild(a);
-//     });
+function selecionarPokemon(id) {
+    if (event) event.preventDefault();
+    console.log(id);
 
-// }
-
+    let pokemon = anteriores[id];
+    limpaCampos();
+    mudarCampos(pokemon);
+    mudarFoto(pokemon);
+    setarTipos(pokemon);
+}
 // FIM METODOS DE CONFIGURAÇÃO E BUSCA
