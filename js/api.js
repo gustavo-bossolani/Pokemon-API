@@ -9,7 +9,7 @@ var xhr = new XMLHttpRequest();
 var url;
 let pokemonAtual;
 let anteriores = [];
-let contadorHistórico = -1;
+let contadorHistorico = -1;
 // FIM ATRIBUTOS
 
 
@@ -51,7 +51,7 @@ function pesquisarPokemon(valorBusca, tipoPesquisa) {
             limpaCampos();
             mudarFoto(pokemonAtual);
             mudarCampos(pokemonAtual);
-            setarTipos(pokemonAtual);
+            setarTipos(pokemonAtual, '#tipo-poke');
 
         } else {
             M.toast({ html: 'Pokemon não Encontrado', classes: 'rounded' });
@@ -75,7 +75,7 @@ brnRetornar.addEventListener('click', () => {
     limpaCampos();
     mudarFoto(pokemonAtual);
     mudarCampos(pokemonAtual);
-    setarTipos(pokemonAtual);
+    setarTipos(pokemonAtual, '#tipo-poke');
 });
 // FIM METODOS DE CRIAÇÃO
 
@@ -102,10 +102,10 @@ function mudarCampos(pokemon) {
     alturaPoke.textContent = pokemon.height / 10 + ' m';
 }
 
-function setarTipos(pokemon) {
+function setarTipos(pokemon, elemento) {
     // TEMPLATE DE BADGE PARA ESTILIZAR TIPOS
     //<span class="badge green white-text text-darken-2">GRASS</span>
-    var tipoPoke = document.querySelector('#tipo-poke');
+    var tipoPoke = document.querySelector(elemento);
 
     // Recuperando objetos de configuração de acordo com o tipo
     var tipos = [];
@@ -319,17 +319,22 @@ function pegaEnumTipos() {
 function salvarNoHistorico(pokemon) {
     // inserindo um pokemon anterior no histórico e adcionando um id no mesmo
     anteriores.push(pokemon);
-    contadorHistórico++;
+    contadorHistorico++;
 
+    // let historico = document.querySelector('#historico');
+    // var li = document.createElement('li');
+    // historico.appendChild(li);
+    // a.classList.add('collection-item');
+
+    let historico = document.querySelector('#historico');
     var a = document.createElement('a');
-    a.classList.add('collection-item');
+
     a.textContent = pokemon.name.toUpperCase();
     a.setAttribute('href', '');
-    a.setAttribute('id', contadorHistórico);
+    a.setAttribute('id', contadorHistorico);
     a.setAttribute('onClick', 'selecionarPokemon(this.id)');
-    let historico = document.querySelector('#historico');
+
     historico.appendChild(a);
-    console.log('histórico atualizado');
 }
 
 function selecionarPokemon(id) {
@@ -340,6 +345,6 @@ function selecionarPokemon(id) {
     limpaCampos();
     mudarCampos(pokemon);
     mudarFoto(pokemon);
-    setarTipos(pokemon);
+    setarTipos(pokemon, '#tipo-poke');
 }
 // FIM METODOS DE CONFIGURAÇÃO E BUSCA
