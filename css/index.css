@@ -12,7 +12,7 @@
 
 .collection a:hover {
     color: white !important;
-    background: #9c27b0 !important;
+    background: #822992 !important;
 }
 
 .border {
@@ -58,4 +58,13 @@ img {
     margin-left: 5px;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px .5px 0 #000, .5px .5px 0 #000;
     border-radius: 5%;
+}
+.header{
+    color: #9c27b0 !important;
+}
+.historico{
+    border-top: #9c27b0;
+    border-bottom: #813b7ab9;
+    border-radius: 3px;
+    border-style: solid;
 }

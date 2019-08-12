@@ -23,7 +23,8 @@
     <nav>
         <div class="nav-wrapper purple">
             <a href="#" class="brand-logo right">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/104.png" width="70px" height="70px">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/104.png" width="70px"
+                    height="70px">
             </a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li><a href="">Gustavo Bossolani</a></li>
@@ -63,8 +64,9 @@
             <!-- Formulário -->
             <h4 class="grey-text">
                 Pesquisando por
-                <h2 id="output-campo-nome" class="purple-text" style="margin-top: -1%;"></h2>
+                <h2 id="output-campo-nome" class="purple-text" style="margin-top: -1%;">Pikachu</h2>
             </h4>
+
             <div class="section">
                 <form>
                     <div class="row">
@@ -72,92 +74,99 @@
                             <input type="text" id="campo-nome" class="validate">
                         </div>
                         <div class="col s2 m2 l2 xl2">
-                            <a class="btn-floating waves-effect waves-light purple" id="retornar-poke">
-                                <i class="material-icons">settings_backup_restore</i>
+                            <a class="btn-floating btn tooltipped waves-effect waves-light purple"
+                                data-position="bottom" id="retornar-poke">
+                                <i class="material-icons">history</i>
                             </a>
                         </div>
 
                     </div>
-                    <button class="btn purple waves-effect waves-light" type="submit" id="pesquisar-pokemon">Buscar</button>
-                    <button class="btn purple waves-effect waves-light" type="submit" id="gerar-pokemon">ALeatório</button>
+                    <button class="btn purple waves-effect waves-light" type="submit"
+                        id="pesquisar-pokemon">Buscar</button>
+                    <button class="btn purple waves-effect waves-light" type="submit"
+                        id="gerar-pokemon">ALeatório</button>
                 </form>
             </div>
             <!-- Fim Formulário -->
+            <div class="section">
+                <!-- Output de Informações -->
+                <div class="row">
+                    <div class="col s12 m12 l4 xl4">
+                        <img src="" class="z-depth-4 center" id="poke-imagem">
+                    </div>
 
-            <!-- Output de Informações -->
-            <div class="row">
-                <div class="col s12 m12 l4 xl4">
-                    <img src="" class="z-depth-4 center" id="poke-imagem">
-                </div>
+                    <!-- COLUNA 1 -->
+                    <div class="col s6 m6 l4 xl4">
+                        <ul>
+                            <!-- NOME -->
+                            <li class="border hoverable">
+                                <blockquote class="nome">
+                                    <h6 style="font-weight:bold;">Nome</h6>
+                                    <span id="nome-poke"></span>
+                                </blockquote>
+                            </li>
 
-                <!-- COLUNA 1 -->
-                <div class="col s6 m6 l4 xl4">
-                    <ul>
-                        <!-- NOME -->
-                        <li class="border hoverable">
-                            <blockquote class="nome">
-                                <h6 style="font-weight:bold;">Nome</h6>
-                                <span id="nome-poke"></span>
-                            </blockquote>
-                        </li>
+                            <!-- NUMERO POKEDEX -->
+                            <li class="border hoverable">
+                                <blockquote class="numero-poke">
+                                    <h6 style="font-weight:bold;">Nº Pokedex</h6>
+                                    <span id="numero-poke"></span>
+                                </blockquote>
+                            </li>
 
-                        <!-- NUMERO POKEDEX -->
-                        <li class="border hoverable">
-                            <blockquote class="numero-poke">
-                                <h6 style="font-weight:bold;">Nº Pokedex</h6>
-                                <span id="numero-poke"></span>
-                            </blockquote>
-                        </li>
+                            <!-- PESO -->
+                            <li class="border hoverable">
+                                <blockquote class="peso">
+                                    <h6 style="font-weight:bold;">Peso</h6>
+                                    <span id="peso-poke"></span>
+                                </blockquote>
+                            </li>
+                        </ul>
+                    </div>
 
-                        <!-- PESO -->
-                        <li class="border hoverable">
-                            <blockquote class="peso">
-                                <h6 style="font-weight:bold;">Peso</h6>
-                                <span id="peso-poke"></span>
-                            </blockquote>
-                        </li>
-                    </ul>
-                </div>
+                    <!-- COLUNA 2 -->
+                    <div class="col s6 m6 l4 xl4">
+                        <ul>
 
-                <!-- COLUNA 2 -->
-                <div class="col s6 m6 l4 xl4">
-                    <ul>
+                            <!-- TIPOS -->
+                            <li class="border hoverable">
+                                <blockquote class="tipo">
+                                    <h6 style="font-weight:bold; margin-bottom: 3%;">Tipo:</h6>
+                                    <div id="tipo-poke"></div>
+                                </blockquote>
+                            </li>
 
-                        <!-- TIPOS -->
-                        <li class="border hoverable">
-                            <blockquote class="tipo">
-                                <h6 style="font-weight:bold; margin-bottom: 3%;">Tipo:</h6>
-                                <div id="tipo-poke"></div>
-                            </blockquote>
-                        </li>
+                            <!-- ID NO SISTEMA -->
+                            <li class="border hoverable">
+                                <blockquote class="id">
+                                    <h6 style="font-weight:bold;">ID</h6>
+                                    <span id="id-poke"></span>
+                                </blockquote>
+                            </li>
 
-                        <!-- ID NO SISTEMA -->
-                        <li class="border hoverable">
-                            <blockquote class="id">
-                                <h6 style="font-weight:bold;">ID</h6>
-                                <span id="id-poke"></span>
-                            </blockquote>
-                        </li>
-
-                        <!-- ALTURA -->
-                        <li class="border hoverable">
-                            <blockquote class="altura">
-                                <h6 style="font-weight:bold;">Altura</h6>
-                                <div id="altura-poke"></div>
-                            </blockquote>
-                        </li>
+                            <!-- ALTURA -->
+                            <li class="border hoverable">
+                                <blockquote class="altura">
+                                    <h6 style="font-weight:bold;">Altura</h6>
+                                    <div id="altura-poke"></div>
+                                </blockquote>
+                            </li>
+                    </div>
                 </div>
             </div>
-            <div class="collection">
-                <nav>
-                    <ul id="historico">
 
-                    </ul>
-                    <!-- <a>
-                        <i class="material-icons">clear</i>
-                    </a> -->
-                </nav>
+            <!-- Seção Histórico -->
+            <div class="section">
+                <h2 class="header">Histórico de Pesquisa</h3>
+                <div class="collection historico">
+                    <nav>
+                        <ul id="historico">
+                        </ul>
+                    </nav>
+                </div>
             </div>
+            <!-- Fim Seção Histórico -->
+
         </div>
     </main>
 </body>
@@ -168,8 +177,14 @@
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="js/api.js"></script>
 <script>
-    $(document).ready(function() {
+    // Inicializando o elemento Collapsible
+    $(document).ready(function () {
         $('.collapsible').collapsible();
+    });
+
+    // Inicializando o elemento tooltip
+    $(document).ready(function () {
+        $('.tooltipped').tooltip();
     });
 </script>
 

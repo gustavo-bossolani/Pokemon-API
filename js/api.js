@@ -1,8 +1,10 @@
 // Atributos DOM
 var btnPesquisar = document.querySelector('#pesquisar-pokemon');
 var btnGerar = document.querySelector('#gerar-pokemon');
-var brnRetornar = document.querySelector('#retornar-poke');
+var btnRetornar = document.querySelector('#retornar-poke');
 var campo = document.querySelector('#campo-nome');
+var output = document.querySelector('#output-campo-nome');
+var progresso = document.querySelector('#barra-progresso');
 
 // Atributos API
 var xhr = new XMLHttpRequest();
@@ -12,10 +14,25 @@ let anteriores = [];
 let contadorHistorico = -1;
 // FIM ATRIBUTOS
 
+inicializar();
+var nomes = setInterval(() => { listaExemplos() }, 3000);
+
+function inicializar() {
+    console.log('inicializando aplicação..');
+    limpaCampos();
+
+    //Fazendo a verificação para exibir mensagem no botão retornar
+    if (pokemonAtual != undefined) {
+        btnRetornar.setAttribute('data-tooltip', `Retornar para: ${pokemonAtual.name}`);
+    } else {
+        btnRetornar.setAttribute('data-tooltip', `Busque um Pokemon.`);
+    }
+    console.log('aplicação inicializada');
+}
 
 campo.addEventListener('input', () => {
-    var output = document.querySelector('#output-campo-nome');
     output.textContent = campo.value;
+    clearInterval(nomes);
 });
 
 // METODOS DE PESQUISA E GERAÇÃO DE OBJETOS
@@ -52,6 +69,7 @@ function pesquisarPokemon(valorBusca, tipoPesquisa) {
             mudarFoto(pokemonAtual);
             mudarCampos(pokemonAtual);
             setarTipos(pokemonAtual, '#tipo-poke');
+            btnRetornar.setAttribute('data-tooltip', `Retornar para: ${pokemonAtual.name.toUpperCase()}`);
 
         } else {
             M.toast({ html: 'Pokemon não Encontrado', classes: 'rounded' });
@@ -71,7 +89,7 @@ btnGerar.addEventListener('click', () => {
     pesquisarPokemon(campo.value.toLowerCase().trim(), 'gerar');
 });
 
-brnRetornar.addEventListener('click', () => {
+btnRetornar.addEventListener('click', () => {
     limpaCampos();
     mudarFoto(pokemonAtual);
     mudarCampos(pokemonAtual);
@@ -150,6 +168,11 @@ function limpaCampos() {
 
 }
 
+function listaExemplos() {
+    var exemplos = ['Charizard-mega-x', 'Rattata-alola', 'Deoxys-speed', 'Bulbasaur', 'Blaziken-mega', 'Pikachu'];
+    var num = Math.floor((Math.random() * 5));
+    output.textContent = exemplos[num];
+}
 
 // FIM MÉTODOS DE MANIPULAÇÃO
 
@@ -320,11 +343,6 @@ function salvarNoHistorico(pokemon) {
     // inserindo um pokemon anterior no histórico e adcionando um id no mesmo
     anteriores.push(pokemon);
     contadorHistorico++;
-
-    // let historico = document.querySelector('#historico');
-    // var li = document.createElement('li');
-    // historico.appendChild(li);
-    // a.classList.add('collection-item');
 
     let historico = document.querySelector('#historico');
     var a = document.createElement('a');
